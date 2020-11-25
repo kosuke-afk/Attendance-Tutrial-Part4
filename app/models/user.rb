@@ -29,7 +29,7 @@ class User < ApplicationRecord  # この継承がActiveRecordのメソッドを�
   
   # 永続化セッションのためにハッシュ化したトークンをデータベースに記憶します。
   def remember
-    self.remember_token = User.new_token  # userオブジェクトの仮想属性のremember_tokenにランダムな文字列を代入している
+    self.remember_token = User.new_token  # userオブジェクトの仮想属性のremember_tokenにランダムな文字列を代入している 仮想属性のremember_tokenにその値を入れている
     update_attribute(:remember_digest, User.digest(remember_token)) # update_attributeメソッドを使って:remember_digestを更新している。
   end                                                               # update_attributeはupdate_attributesとは違いvalidationを素通りさせる。
   
