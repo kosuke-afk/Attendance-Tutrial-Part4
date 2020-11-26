@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '~> 5.1.6'
-gem "bcrypt" # has_secure_passwordを使えるようにする。
+gem 'bcrypt' # has_secure_passwordを使えるようにする。
+gem 'faker'  # 実際に存在していそうな名前を生成してくれるもの
 gem 'bootstrap-sass'
+gem 'will_paginate' # ページネートを使えるようにする
+gem 'bootstrap-will_paginate' # ページネーションのデザインをお手軽によくするもの
 gem 'puma',         '~> 3.7'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'

@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
   def new
     @user = User.new
   end
   
   def show
+  end
+  
+  def index
+    @users = User.paginate(page: params[:page])
   end
   
   def create
@@ -31,6 +36,12 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  
+  def destroy
+    @user.destroy
+    flash[:success] = "#{@user.name}のデータを削除しました。"
+    redirect_to users_url
+  end
   private
     
     def params_user
@@ -52,5 +63,10 @@ class UsersController < ApplicationController
     # ログインしているユーザーとアクセスしたユーザーが同じ場合のみ使えるようにする
     def correct_user
       redirect_to(root_url) unless current_user?(@user)
+    end
+    
+    # 管理者権限を持っていないと使えないようにする
+    def admin_user
+      redirect_to root_url unless current_user.admin?
     end
 end
