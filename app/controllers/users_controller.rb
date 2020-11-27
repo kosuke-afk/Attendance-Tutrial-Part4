@@ -3,13 +3,14 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
+  before_action :set_one_month, only: :show
   def new
     @user = User.new
   end
   
   def show
-    @first_day = Date.current.beginning_of_month # 当日をDate.currentで取得して、beginning_of_monthで当月の初日を取得
-    @last_day = @first_day.end_of_month # end_of_monthで当月の末日を取得
+    @first_day = Date.current.beginning_of_month 
+    @last_day = @first_day.end_of_month 
   end
   
   def index
