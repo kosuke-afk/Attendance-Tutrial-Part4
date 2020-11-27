@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
   
   def show
+    @first_day = Date.current.beginning_of_month # 当日をDate.currentで取得して、beginning_of_monthで当月の初日を取得
+    @last_day = @first_day.end_of_month # end_of_monthで当月の末日を取得
   end
   
   def index
