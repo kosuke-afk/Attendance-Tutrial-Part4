@@ -1,4 +1,7 @@
 class User < ApplicationRecord  # この継承がActiveRecordのメソッドを使えるようにしている。
+
+    # attendanceモデルと関連づけるコード　１対多の関係を表すものだから、attendancesとなっている。 userが消されたらそのuserの勤怠情報も消える
+  has_many :attendances, dependent: :destroy
   attr_accessor :remember_token
   before_save { self.email = email.downcase }  # 右側の式はself.email.downcaseと書くことができるが、modelファイルの中では省略可能
 
