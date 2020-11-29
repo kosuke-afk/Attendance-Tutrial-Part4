@@ -67,25 +67,5 @@ class UsersController < ApplicationController
       params.require(:user).permit(:department, :basic_time, :work_time)
     end
     
-    def set_user
-      @user = User.find(params[:id]) # どのユーザーかの識別に必要 edit, show, updateで使う
-    end
-    # ログインしているユーザーのみ使えるようにする。
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "ログインしてください。"
-        redirect_to login_url
-      end
-    end
     
-    # ログインしているユーザーとアクセスしたユーザーが同じ場合のみ使えるようにする
-    def correct_user
-      redirect_to(root_url) unless current_user?(@user)
-    end
-    
-    # 管理者権限を持っていないと使えないようにする
-    def admin_user
-      redirect_to root_url unless current_user.admin?
-    end
 end
