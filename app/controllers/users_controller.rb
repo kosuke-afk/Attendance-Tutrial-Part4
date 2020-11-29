@@ -9,8 +9,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @first_day = Date.current.beginning_of_month 
-    @last_day = @first_day.end_of_month 
   end
   
   def index
