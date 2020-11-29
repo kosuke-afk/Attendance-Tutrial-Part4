@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  UPDATE_ERROR_MSG = "勤怠登録に失敗しました。"
   
   def update
     # どのユーザーなのか判別に必要
@@ -12,6 +13,12 @@ class AttendancesController < ApplicationController
         flash[:success] = "おはようございます。"
       else
         flash[:danger] = "勤怠登録に失敗しました。"
+      end
+    elsif @attendance.finished_at.nil?
+      if @attendance.update_attributes(finished_at: Time.current)
+        flash[:info] = "お疲れ様でした。"
+      else
+        flash[:danger] = UPDATE_ERROR_MSG
       end
     end
     # showページにリダイレクト
