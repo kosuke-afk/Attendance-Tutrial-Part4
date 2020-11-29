@@ -18,7 +18,9 @@ class AttendancesController < ApplicationController
       else
         flash[:danger] = "勤怠登録に失敗しました。"
       end
+      # @attendanceのfinished_atがなければ
     elsif @attendance.finished_at.nil?
+      # 今の時間をfinished_atに入れて更新
       if @attendance.update_attributes(finished_at: Time.current.change(sec: 0))
         flash[:info] = "お疲れ様でした。"
       else
